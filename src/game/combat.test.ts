@@ -20,6 +20,7 @@ describe("combat engine", () => {
 
   it("player strikes deal damage to enemy", () => {
     const combat = createCombat("frost_wolf");
+    combat.turn = "player";
     const initialHp = combat.enemy.hp;
     const strike = getSkillById("strike")!;
     const after = playerUseSkill(combat, strike.id);
@@ -28,6 +29,7 @@ describe("combat engine", () => {
 
   it("guard skill does not change enemy hp", () => {
     const combat = createCombat("frost_wolf");
+    combat.turn = "player";
     const initialHp = combat.enemy.hp;
     const guard = getSkillById("guard")!;
     const after = playerUseSkill(combat, guard.id);
@@ -37,6 +39,7 @@ describe("combat engine", () => {
 
   it("heal skill restores player hp", () => {
     const combat = createCombat("frost_wolf");
+    combat.turn = "player";
     combat.player.hp = 50;
     const heal = getSkillById("rune_mend")!;
     const after = playerUseSkill(combat, heal.id);
@@ -46,6 +49,7 @@ describe("combat engine", () => {
 
   it("frost rune freezes enemy and skips their turn attack", () => {
     const combat = createCombat("frost_wolf");
+    combat.turn = "player";
     const frost = getSkillById("rune_frost")!;
     const after = playerUseSkill(combat, frost.id);
     expect(after.enemy.statuses.some((s) => s.type === "freeze")).toBe(true);
@@ -58,6 +62,7 @@ describe("combat engine", () => {
 
   it("heavy strike applies bleed to enemy", () => {
     const combat = createCombat("frost_wolf");
+    combat.turn = "player";
     const heavy = getSkillById("heavy_strike")!;
     const after = playerUseSkill(combat, heavy.id);
     expect(after.enemy.statuses.some((s) => s.type === "bleed")).toBe(true);
@@ -65,6 +70,7 @@ describe("combat engine", () => {
 
   it("warcry buff increases player attack", () => {
     const combat = createCombat("frost_wolf");
+    combat.turn = "player";
     const warcry = getSkillById("rune_warcry")!;
     const after = playerUseSkill(combat, warcry.id);
     expect(after.player.statuses.some((s) => s.type === "buff_atk")).toBe(true);
@@ -88,6 +94,7 @@ describe("combat engine", () => {
 
   it("combat ends on enemy defeat", () => {
     const combat = createCombat("frost_wolf");
+    combat.turn = "player";
     combat.enemy.hp = 1;
     const strike = getSkillById("strike")!;
     const after = playerUseSkill(combat, strike.id);
@@ -106,6 +113,7 @@ describe("combat engine", () => {
 
   it("defending halves incoming damage", () => {
     const combat = createCombat("frost_wolf");
+    combat.turn = "player";
     const guard = getSkillById("guard")!;
     const afterGuard = playerUseSkill(combat, guard.id);
     afterGuard.turn = "enemy";

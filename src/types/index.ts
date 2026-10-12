@@ -68,7 +68,7 @@ export interface CombatLogEntry {
   id: number;
   text: string;
   side: "player" | "enemy" | "system";
-  kind: "attack" | "defend" | "heal" | "effect" | "info" | "victory" | "defeat";
+  kind: "attack" | "defend" | "heal" | "buff" | "effect" | "info" | "victory" | "defeat";
 }
 
 export interface CombatState {

@@ -1,15 +1,16 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 interface PanelProps {
   children: ReactNode;
   title?: string;
   className?: string;
   actions?: ReactNode;
+  style?: CSSProperties;
 }
 
-export function Panel({ children, title, className = "", actions }: PanelProps) {
+export function Panel({ children, title, className = "", actions, style }: PanelProps) {
   return (
-    <div className={`panel ${className}`.trim()}>
+    <div className={`panel ${className}`.trim()} style={style}>
       <span className="panel-corner tl" />
       <span className="panel-corner tr" />
       <span className="panel-corner bl" />
