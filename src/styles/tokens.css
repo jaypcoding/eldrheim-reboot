@@ -1,0 +1,94 @@
+:root {
+  /* ===== Color Ramps ===== */
+  --c-void: #0B1018;
+  --c-void-deep: #070A10;
+  --c-abyss: #090D13;
+  --c-deep-blue: #121C29;
+  --c-panel: #1B2633;
+  --c-panel-light: #243040;
+  --c-panel-border: #2E3D50;
+  --c-frost-gray: #394654;
+  --c-frost-gray-light: #4A5A6B;
+  --c-ice: #A9C5D8;
+  --c-ice-bright: #C4DAE8;
+  --c-snow: #E8EEF2;
+  --c-snow-dim: #C8D2DC;
+  --c-rune-gold: #C8A24A;
+  --c-rune-gold-dark: #9A7A30;
+  --c-rune-gold-light: #E0BC60;
+  --c-ember: #B85C38;
+  --c-ember-light: #D4744E;
+  --c-ember-glow: #E89464;
+  --c-blood: #8B2C24;
+  --c-blood-light: #B8443A;
+  --c-frost-green: #4A7C5E;
+  --c-frost-green-light: #6A9C7E;
+  --c-warning: #C9A03A;
+  --c-error: #B8443A;
+
+  /* ===== Typography ===== */
+  --font-display: "MedievalSharp", "Georgia", serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "Inter", monospace;
+
+  --fs-xs: 0.6875rem;
+  --fs-sm: 0.75rem;
+  --fs-base: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.5rem;
+  --fs-2xl: 2rem;
+  --fs-3xl: 2.75rem;
+  --fs-hero: 3.5rem;
+
+  --lh-tight: 1.2;
+  --lh-normal: 1.5;
+
+  --fw-normal: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* ===== Spacing (8px system) ===== */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 40px;
+  --sp-8: 48px;
+  --sp-9: 64px;
+  --sp-10: 80px;
+
+  /* ===== Borders ===== */
+  --bd-thin: 1px;
+  --bd-medium: 2px;
+  --bd-thick: 3px;
+
+  --bd-radius-sm: 2px;
+  --bd-radius: 4px;
+  --bd-radius-md: 6px;
+  --bd-radius-lg: 8px;
+
+  /* ===== Shadows ===== */
+  --sh-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --sh-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --sh-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --sh-glow-gold: 0 0 16px rgba(200, 162, 74, 0.25);
+  --sh-glow-ember: 0 0 20px rgba(184, 92, 56, 0.2);
+  --sh-inset: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  /* ===== Transitions ===== */
+  --tr-fast: 150ms ease;
+  --tr-normal: 250ms ease;
+  --tr-slow: 400ms ease;
+
+  /* ===== Z-index ===== */
+  --z-bg: 0;
+  --z-scene: 1;
+  --z-panel: 10;
+  --z-overlay: 50;
+  --z-modal: 100;
+  --z-toast: 200;
+}

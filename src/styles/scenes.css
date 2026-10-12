@@ -1,0 +1,675 @@
+/* ============================================================
+   3D Pixel Art Scene System
+   Creates atmospheric Nordic fantasy environments using
+   pure CSS with pixel-art aesthetics.
+   ============================================================ */
+
+.pixel-scene {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-bg);
+  overflow: hidden;
+  image-rendering: pixelated;
+  background: var(--c-void-deep);
+}
+
+/* --- Snow / ash particle layer --- */
+.snow-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.snow-flake {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--c-snow);
+  opacity: 0.6;
+  animation: snowfall linear infinite;
+}
+
+@keyframes snowfall {
+  0% {
+    transform: translateY(-10px) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(100vh) translateX(20px);
+    opacity: 0;
+  }
+}
+
+/* --- Fog / mist layer --- */
+.fog-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.15;
+  background: radial-gradient(
+      ellipse 60% 40% at 30% 80%,
+      var(--c-ice) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 30% at 70% 70%,
+      var(--c-frost-gray) 0%,
+      transparent 60%
+    );
+  animation: fogdrift 30s ease-in-out infinite alternate;
+}
+
+@keyframes fogdrift {
+  0% {
+    transform: translateX(-20px);
+  }
+  100% {
+    transform: translateX(20px);
+  }
+}
+
+/* --- Pixel ground / terrain --- */
+.pixel-ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+/* ============================================================
+   Title Scene — Frozen fortress vista
+   ============================================================ */
+.scene-title {
+  background: linear-gradient(
+    180deg,
+    #060810 0%,
+    #0B1018 20%,
+    #0E1520 40%,
+    #121C29 65%,
+    #1B2633 85%,
+    #243040 100%
+  );
+}
+
+.scene-title::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    /* Distant aurora */
+    radial-gradient(
+      ellipse 40% 15% at 50% 15%,
+      rgba(74, 124, 94, 0.08) 0%,
+      transparent 70%
+    ),
+    /* Stars */
+    radial-gradient(1px 1px at 10% 8%, var(--c-snow) 50%, transparent),
+    radial-gradient(1px 1px at 25% 12%, var(--c-snow-dim) 50%, transparent),
+    radial-gradient(1px 1px at 40% 6%, var(--c-snow) 50%, transparent),
+    radial-gradient(1px 1px at 60% 10%, var(--c-snow-dim) 50%, transparent),
+    radial-gradient(1px 1px at 75% 14%, var(--c-snow) 50%, transparent),
+    radial-gradient(1px 1px at 88% 7%, var(--c-snow-dim) 50%, transparent),
+    radial-gradient(1px 1px at 15% 20%, var(--c-snow-dim) 50%, transparent),
+    radial-gradient(1px 1px at 52% 18%, var(--c-snow) 50%, transparent),
+    radial-gradient(1px 1px at 82% 22%, var(--c-snow-dim) 50%, transparent);
+}
+
+/* Mountains — built with CSS clip-path for pixel art feel */
+.scene-title-mountains {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  z-index: 0;
+}
+
+.mountain {
+  position: absolute;
+  bottom: 0;
+  background: var(--c-deep-blue);
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+}
+
+.mountain.m1 {
+  left: -5%;
+  width: 35%;
+  height: 60%;
+  background: #0D1420;
+}
+
+.mountain.m2 {
+  left: 15%;
+  width: 40%;
+  height: 80%;
+  background: #101828;
+}
+
+.mountain.m3 {
+  left: 40%;
+  width: 35%;
+  height: 70%;
+  background: #0E1320;
+}
+
+.mountain.m4 {
+  left: 60%;
+  width: 45%;
+  height: 85%;
+  background: #121C29;
+}
+
+.mountain.m5 {
+  left: 75%;
+  width: 30%;
+  height: 55%;
+  background: #0D1420;
+}
+
+/* Snow caps on mountains */
+.mountain::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30%;
+  background: var(--c-ice);
+  clip-path: polygon(50% 0%, 65% 40%, 60% 45%, 55% 35%, 50% 50%, 45% 35%, 40% 45%, 35% 40%, 50% 0%);
+  opacity: 0.4;
+}
+
+/* Fortress silhouette */
+.scene-title-fortress {
+  position: absolute;
+  bottom: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+}
+
+.fortress-tower {
+  width: 40px;
+  background: var(--c-panel);
+  position: relative;
+}
+
+.fortress-tower.t1 {
+  height: 80px;
+  background: #1A2330;
+}
+
+.fortress-tower.t2 {
+  height: 120px;
+  background: #1E2835;
+}
+
+.fortress-tower.t3 {
+  height: 150px;
+  background: #212C3A;
+}
+
+.fortress-tower.t4 {
+  height: 115px;
+  background: #1E2835;
+}
+
+.fortress-tower.t5 {
+  height: 75px;
+  background: #1A2330;
+}
+
+/* Tower windows — warm glow */
+.fortress-tower::before {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 8px;
+  background: var(--c-ember-glow);
+  box-shadow: 0 0 6px rgba(232, 148, 100, 0.5);
+}
+
+/* Tower roof — snow-covered */
+.fortress-tower::after {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: -4px;
+  right: -4px;
+  height: 14px;
+  background: var(--c-panel-dark);
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+}
+
+/* Fortress wall */
+.fortress-wall {
+  position: absolute;
+  bottom: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  height: 50px;
+  background: var(--c-panel);
+  z-index: 0;
+}
+
+/* Foreground snow ground */
+.scene-title-ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20%;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    #2A3848 0%,
+    #1E2835 50%,
+    #181F2A 100%
+  );
+}
+
+/* Snow texture dots on ground */
+.scene-title-ground::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 15% 30%, var(--c-snow) 50%, transparent),
+    radial-gradient(1px 1px at 35% 50%, var(--c-snow-dim) 50%, transparent),
+    radial-gradient(1px 1px at 55% 25%, var(--c-snow) 50%, transparent),
+    radial-gradient(1px 1px at 75% 60%, var(--c-snow-dim) 50%, transparent),
+    radial-gradient(1px 1px at 85% 35%, var(--c-snow) 50%, transparent),
+    radial-gradient(1px 1px at 25% 70%, var(--c-snow-dim) 50%, transparent),
+    radial-gradient(1px 1px at 65% 80%, var(--c-snow) 50%, transparent),
+    radial-gradient(1px 1px at 45% 15%, var(--c-snow-dim) 50%, transparent),
+    radial-gradient(1px 1px at 5% 55%, var(--c-snow) 50%, transparent),
+    radial-gradient(1px 1px at 95% 45%, var(--c-snow-dim) 50%, transparent);
+  opacity: 0.3;
+}
+
+/* Pine trees in foreground */
+.scene-title-trees {
+  position: absolute;
+  bottom: 15%;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5%;
+}
+
+.pine-tree {
+  position: relative;
+  width: 24px;
+  height: 60px;
+}
+
+.pine-tree::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 15px;
+  background: #2A2018;
+}
+
+.pine-tree::after {
+  content: "";
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 50px;
+  background: #1A2A20;
+  clip-path: polygon(50% 0%, 80% 30%, 70% 30%, 90% 60%, 75% 60%, 100% 100%, 0% 100%, 25% 60%, 10% 60%, 30% 30%, 20% 30%, 50% 0%);
+}
+
+/* ============================================================
+   City Scene — Isometric village
+   ============================================================ */
+.scene-city {
+  background: linear-gradient(
+    180deg,
+    #080B12 0%,
+    #0B1018 25%,
+    #0F1620 50%,
+    #16202C 75%,
+    #1E2835 100%
+  );
+}
+
+.scene-city::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(1px 1px at 12% 10%, var(--c-snow-dim) 50%, transparent),
+    radial-gradient(1px 1px at 35% 8%, var(--c-snow) 50%, transparent),
+    radial-gradient(1px 1px at 58% 12%, var(--c-snow-dim) 50%, transparent),
+    radial-gradient(1px 1px at 78% 6%, var(--c-snow) 50%, transparent),
+    radial-gradient(1px 1px at 92% 14%, var(--c-snow-dim) 50%, transparent),
+    /* Distant mountain silhouette */
+    radial-gradient(
+      ellipse 80% 25% at 50% 35%,
+      #0D1420 0%,
+      transparent 70%
+    );
+}
+
+/* City ground — isometric plane */
+.scene-city-ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 75%;
+  z-index: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    #1A2330 15%,
+    #1E2835 40%,
+    #222D3B 70%,
+    #1A2330 100%
+  );
+}
+
+/* Path through the village */
+.scene-city-path {
+  position: absolute;
+  bottom: 10%;
+  left: 10%;
+  right: 10%;
+  height: 50%;
+  z-index: 0;
+  background: linear-gradient(
+    180deg,
+    #2A3340 0%,
+    #252E3A 50%,
+    #20283335 100%
+  );
+  clip-path: polygon(35% 0%, 65% 0%, 80% 100%, 20% 100%);
+  opacity: 0.6;
+}
+
+/* Buildings — isometric boxes */
+.city-building {
+  position: absolute;
+  z-index: 1;
+  transform-style: preserve-3d;
+}
+
+.building-body {
+  position: relative;
+  background: var(--c-panel);
+  border: 1px solid var(--c-panel-border);
+  box-shadow: var(--sh-md);
+}
+
+.building-roof {
+  position: absolute;
+  top: -16px;
+  left: -4px;
+  right: -4px;
+  height: 18px;
+  background: #2A3340;
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+}
+
+.building-roof::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 30%;
+  right: 30%;
+  height: 6px;
+  background: var(--c-ice);
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  opacity: 0.5;
+}
+
+.building-window {
+  position: absolute;
+  width: 6px;
+  height: 8px;
+  background: var(--c-ember-glow);
+  box-shadow: 0 0 4px rgba(232, 148, 100, 0.4);
+}
+
+/* ============================================================
+   Combat Arena
+   ============================================================ */
+.scene-combat {
+  background: linear-gradient(
+    180deg,
+    #060810 0%,
+    #0A0E14 30%,
+    #0E1318 60%,
+    #121A22 100%
+  );
+}
+
+.scene-combat::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    /* Cave opening / dark arches */
+    radial-gradient(
+      ellipse 30% 20% at 20% 15%,
+      rgba(20, 28, 40, 0.4) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 25% 18% at 80% 12%,
+      rgba(18, 25, 36, 0.4) 0%,
+      transparent 60%
+    );
+}
+
+/* Arena floor — stone tiles with perspective */
+.scene-combat-arena {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 55%;
+  z-index: 0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 38px,
+      rgba(57, 70, 84, 0.15) 38px,
+      rgba(57, 70, 84, 0.15) 40px
+    ),
+    linear-gradient(180deg, #161E28 0%, #1A2330 50%, #0E1318 100%);
+  clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+}
+
+/* Arena back wall */
+.scene-combat-wall {
+  position: absolute;
+  bottom: 40%;
+  left: 0;
+  right: 0;
+  height: 25%;
+  z-index: 0;
+  background: linear-gradient(180deg, #0A0E14 0%, #121A22 100%);
+  border-bottom: 2px solid rgba(57, 70, 84, 0.2);
+}
+
+/* Torch lights */
+.torch-glow {
+  position: absolute;
+  width: 80px;
+  height: 120px;
+  z-index: 1;
+  background: radial-gradient(
+    ellipse 50% 50% at 50% 70%,
+    rgba(232, 148, 100, 0.15) 0%,
+    transparent 70%
+  );
+  animation: flicker 3s ease-in-out infinite alternate;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+/* ============================================================
+   Character / Inventory scene — Interior
+   ============================================================ */
+.scene-interior {
+  background: linear-gradient(
+    180deg,
+    #0A0E14 0%,
+    #0E141C 40%,
+    #121A22 80%,
+    #161E28 100%
+  );
+}
+
+.scene-interior::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    /* Stone wall texture */
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 19px,
+      rgba(30, 40, 53, 0.3) 19px,
+      rgba(30, 40, 53, 0.3) 20px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 39px,
+      rgba(30, 40, 53, 0.2) 39px,
+      rgba(30, 40, 53, 0.2) 40px
+    ),
+    /* Warm light from hearth */
+    radial-gradient(
+      ellipse 40% 30% at 30% 50%,
+      rgba(184, 92, 56, 0.06) 0%,
+      transparent 70%
+    );
+}
+
+/* ============================================================
+   Generic dark scene for menus / skills / map / quests / journal
+   ============================================================ */
+.scene-dark {
+  background: linear-gradient(
+    180deg,
+    #060810 0%,
+    #0B1018 30%,
+    #0E141C 60%,
+    #121A22 100%
+  );
+}
+
+.scene-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(1px 1px at 10% 8%, var(--c-snow-dim) 50%, transparent),
+    radial-gradient(1px 1px at 30% 15%, var(--c-snow) 50%, transparent),
+    radial-gradient(1px 1px at 50% 6%, var(--c-snow-dim) 50%, transparent),
+    radial-gradient(1px 1px at 70% 12%, var(--c-snow) 50%, transparent),
+    radial-gradient(1px 1px at 90% 9%, var(--c-snow-dim) 50%, transparent),
+    radial-gradient(
+      ellipse 60% 20% at 50% 30%,
+      #0D1420 0%,
+      transparent 70%
+    );
+}
+
+/* Rune glow decoration */
+.rune-glow {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--c-rune-gold);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--c-rune-gold);
+  animation: rune-pulse 4s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes rune-pulse {
+  0%, 100% { opacity: 0.3; box-shadow: 0 0 4px var(--c-rune-gold); }
+  50% { opacity: 0.8; box-shadow: 0 0 12px var(--c-rune-gold); }
+}
+
+/* ============================================================
+   Vignette overlay for all scenes
+   ============================================================ */
+.scene-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 100% 80% at 50% 50%,
+    transparent 50%,
+    rgba(6, 8, 16, 0.5) 100%
+  );
+}
+
+/* ============================================================
+   Responsive adjustments
+   ============================================================ */
+@media (max-width: 768px) {
+  .fortress-tower { width: 28px; }
+  .fortress-tower.t1 { height: 55px; }
+  .fortress-tower.t2 { height: 85px; }
+  .fortress-tower.t3 { height: 105px; }
+  .fortress-tower.t4 { height: 80px; }
+  .fortress-tower.t5 { height: 50px; }
+  .fortress-wall { width: 180px; height: 35px; }
+  .pine-tree { width: 16px; height: 40px; }
+  .pine-tree::after { width: 16px; height: 35px; }
+}
+
+@media (max-width: 480px) {
+  .fortress-tower { width: 20px; }
+  .fortress-tower.t1 { height: 40px; }
+  .fortress-tower.t2 { height: 60px; }
+  .fortress-tower.t3 { height: 75px; }
+  .fortress-tower.t4 { height: 55px; }
+  .fortress-tower.t5 { height: 35px; }
+  .fortress-wall { width: 130px; height: 25px; }
+  .pine-tree { width: 12px; height: 30px; }
+  .pine-tree::after { width: 12px; height: 25px; }
+}
